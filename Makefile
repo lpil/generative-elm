@@ -32,6 +32,6 @@ node_modules:
 	cd $(abspath $@/..) && yarn
 
 %/elm-stuff:
-	cd $(abspath $@/..) && elm-package install --yes
+	cd $(abspath $@/..) && $(ELM_PACKAGE) install --yes
 
 .PHONY: install clean-all
