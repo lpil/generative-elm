@@ -10,6 +10,7 @@ Exploring Matt Pearson's "Generative Art" book, with Elm!
 - [2.4.1: (A lack of) while loops](https://github.com/lpil/generative-elm/tree/master/arts/2.4.1)
 - [2.4.2: Leaving traces](https://github.com/lpil/generative-elm/tree/master/arts/2.4.2)
 - [2.4.3: (A lack of) for loops](https://github.com/lpil/generative-elm/tree/master/arts/2.4.3)
+- [3.2: Ranom variance](https://github.com/lpil/generative-elm/tree/master/arts/3.2)
 
 
 ## Usage
