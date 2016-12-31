@@ -17,7 +17,6 @@ help:
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-
 install: node_modules $(ELM_STUFF_DIRS) ## Install deps
 
 clean: ## Remove compiled output
@@ -35,12 +34,22 @@ start: ## Start the art specified by the `art` env var
 # Files
 #
 
+README.md: FORCE
+	cd arts && \
+		for art in *;     \
+		do                   \
+			line="- [$$art: $$(cat $$art/title.txt)](https://github.com/lpil/generative-elm/tree/master/arts/$$art)"; \
+			contents="$$contents\n$$line"; \
+		done; \
+		cat ../templates/README.md \
+			| sed "s|{contents}|$$(echo $$contents)|" \
+			> ../README.md
+
 dist: $(MAINS)
 	rsync --recursive --quiet --include '*/' --include 'main.js' --exclude '*' --prune-empty-dirs arts/ dist/
 	find dist/* -type d -exec cp templates/page.html {}/index.html \;
 	cp templates/index.html dist/index.html
 	tree dist
-
 
 arts/%/main.js:
 	cd $(dir $@) && $(ELM_MAKE) Main.elm --warn --output main.js
@@ -54,5 +63,6 @@ node_modules:
 %/elm-stuff:
 	cd $(abspath $@/..) && $(ELM_PACKAGE) install --yes
 
+FORCE:
 
 .PHONY: help install clean clean-deps start

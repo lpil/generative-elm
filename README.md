@@ -13,7 +13,6 @@ Exploring Matt Pearson's "Generative Art" book, with Elm!
 - [3.2: Random variance](https://github.com/lpil/generative-elm/tree/master/arts/3.2)
 - [3.3.1: Perlin noise in Elm](https://github.com/lpil/generative-elm/tree/master/arts/3.3.1)
 
-
 ## Usage
 
 ```sh
