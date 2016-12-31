@@ -37,8 +37,8 @@ start: ## Start the art specified by the `art` env var
 
 dist: $(MAINS)
 	rsync --recursive --quiet --include '*/' --include 'main.js' --exclude '*' --prune-empty-dirs arts/ dist/
-	find dist/* -type d -exec cp page-template.html {}/index.html \;
-	cp index-template.html dist/index.html
+	find dist/* -type d -exec cp templates/page.html {}/index.html \;
+	cp templates/index.html dist/index.html
 	tree dist
 
 

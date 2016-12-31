@@ -11,6 +11,7 @@ Exploring Matt Pearson's "Generative Art" book, with Elm!
 - [2.4.2: Leaving traces](https://github.com/lpil/generative-elm/tree/master/arts/2.4.2)
 - [2.4.3: (A lack of) for loops](https://github.com/lpil/generative-elm/tree/master/arts/2.4.3)
 - [3.2: Random variance](https://github.com/lpil/generative-elm/tree/master/arts/3.2)
+- [3.3.1: Perlin noise in Elm](https://github.com/lpil/generative-elm/tree/master/arts/3.3.1)
 
 
 ## Usage
