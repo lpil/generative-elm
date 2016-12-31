@@ -1,3 +1,5 @@
 node_modules
 elm-stuff
 arts/*/index.html
+arts/*/main.js
+dist
