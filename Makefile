@@ -36,8 +36,8 @@ start: ## Start the art specified by the `art` env var
 
 README.md: FORCE
 	cd arts && \
-		for art in *;     \
-		do                   \
+		for art in *; \
+		do \
 			line="- [$$art: $$(cat $$art/title.txt)](https://github.com/lpil/generative-elm/tree/master/arts/$$art)"; \
 			contents="$$contents\n$$line"; \
 		done; \
@@ -45,7 +45,19 @@ README.md: FORCE
 			| sed "s|{contents}|$$(echo $$contents)|" \
 			> ../README.md
 
-dist: $(MAINS)
+dist/index.html:
+	mkdir -p dist
+	cd arts && \
+		for art in *; \
+		do \
+			line="<li><a href=\"https://github.com/lpil/generative-elm/tree/master/arts/$$art\">$$art: $$(cat $$art/title.txt)</a></li>"; \
+			contents="$$contents\n$$line"; \
+		done; \
+		cat ../templates/index.html \
+			| sed "s|{contents}|$$(echo $$contents)|" \
+			> ../dist/index.html
+
+dist: dist/index.html $(MAINS)
 	rsync --recursive --quiet --include '*/' --include 'main.js' --exclude '*' --prune-empty-dirs arts/ dist/
 	find dist/* -type d -exec cp templates/page.html {}/index.html \;
 	cp templates/index.html dist/index.html
