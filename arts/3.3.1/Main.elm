@@ -3,9 +3,9 @@ module Main exposing (..)
 import Html exposing (Html)
 import Collage exposing (..)
 import Element
-import Random as Random
-import List as List
-import Noise as Noise
+import Random
+import List
+import Noise
 
 
 type alias Model =

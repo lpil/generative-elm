@@ -3,8 +3,8 @@ module Main exposing (..)
 import Html exposing (Html)
 import Collage exposing (..)
 import Element
-import Random as Random
-import List as List
+import Random
+import List
 
 
 type alias Model =

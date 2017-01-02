@@ -3,8 +3,8 @@ module Main exposing (..)
 import Html exposing (Html)
 import Collage exposing (..)
 import Element
-import Color as Color exposing (Color)
-import List as List
+import Color exposing (Color)
+import List
 
 
 lineStyle : Color -> LineStyle
