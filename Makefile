@@ -29,6 +29,18 @@ start: ## Start the art specified by the `art` env var
 	@[ "${art}" ] || (echo -e "ERROR: art env var not set\n" && exit 1)
 	cd arts/$(art) && $(ELM_LIVE) Main.elm --open --path-to-elm-make=$(ELM_MAKE)
 
+deploy: dist ## Push the compiled site to gh-pages
+	rm -rf /tmp/generative-elm-deploy
+	mv dist /tmp/generative-elm-deploy
+	cd /tmp/generative-elm-deploy && \
+		git init && \
+		git remote add origin git@github.com:lpil/generative-elm.git && \
+		git checkout -b gh-pages && \
+		git add --all && \
+		git commit -m 'deploy' && \
+		git push origin HEAD --force
+	rm -rf /tmp/generative-elm-deploy
+
 
 #
 # Files
@@ -50,7 +62,7 @@ dist/index.html:
 	cd arts && \
 		for art in *; \
 		do \
-			line="<li><a href=\"https://github.com/lpil/generative-elm/tree/master/arts/$$art\">$$art: $$(cat $$art/title.txt)</a></li>"; \
+			line="<li><a href=\"$$art\">$$art: $$(cat $$art/title.txt)</a> - <a href=\"https://github.com/lpil/generative-elm/tree/master/arts/$$art\">[source]</a></li>"; \
 			contents="$$contents\n$$line"; \
 		done; \
 		cat ../templates/index.html \
@@ -59,8 +71,7 @@ dist/index.html:
 
 dist: dist/index.html $(MAINS)
 	rsync --recursive --quiet --include '*/' --include 'main.js' --exclude '*' --prune-empty-dirs arts/ dist/
-	find dist/* -type d -exec cp templates/page.html {}/index.html \;
-	cp templates/index.html dist/index.html
+	find dist/* -type d -exec cp -v templates/page.html {}/index.html \;
 	tree dist
 
 arts/%/main.js:
@@ -77,4 +88,4 @@ node_modules:
 
 FORCE:
 
-.PHONY: help install clean clean-deps start
+.PHONY: help install clean clean-deps start deploy
