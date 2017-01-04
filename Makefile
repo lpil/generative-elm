@@ -29,7 +29,7 @@ start: ## Start the art specified by the `art` env var
 	@[ "${art}" ] || (echo -e "ERROR: art env var not set\n" && exit 1)
 	cd arts/$(art) && $(ELM_LIVE) Main.elm --open --path-to-elm-make=$(ELM_MAKE)
 
-deploy: dist ## Push the compiled site to gh-pages
+deploy: dist README.md ## Push the compiled site to gh-pages
 	rm -rf /tmp/generative-elm-deploy
 	mv dist /tmp/generative-elm-deploy
 	cd /tmp/generative-elm-deploy && \
